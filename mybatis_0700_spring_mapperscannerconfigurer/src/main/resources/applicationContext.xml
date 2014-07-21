@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+     xmlns:aop="http://www.springframework.org/schema/aop"
+     xmlns:tx="http://www.springframework.org/schema/tx"
+     xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+     xmlns:context="http://www.springframework.org/schema/context"
+     xsi:schemaLocation="
+     http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+     http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+     http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-3.0.xsd
+     http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+     http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
+
+   <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+        <property name="driverClassName" value="com.mysql.jdbc.Driver"></property>
+        <property name="url" value="jdbc:mysql://localhost:3306/test?useUnicode=true&amp;characterEncoding=UTF-8&amp;zeroDateTimeBehavior=convertToNull"></property>
+        <property name="username" value="root"></property>
+        <property name="password" value="root"></property>
+        <property name="maxActive" value="100"></property>
+        <property name="maxIdle" value="30"></property>
+        <property name="maxWait" value="500"></property>
+        <property name="defaultAutoCommit" value="true"></property>
+    </bean>
+    
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+    	<!--configLocation属性指定mybatis的核心配置文件-->
+        <property name="configLocation" value="classpath:mybatis-config.xml"></property>
+        <!-- dataSource属性指定要用到的连接池 -->
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+    
+    <bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
+    	<constructor-arg index="0" ref="sqlSessionFactory"/>
+    </bean>
+
+    <bean id="userService" class="org.example.mybatis.service.impl.UserServiceImpl">
+        <property name="userDao" ref="userDao"></property>
+    </bean>
+    
+    <bean id="userDao" class="org.example.mybatis.dao.impl.UserDaoImpl">
+    	<!-- 注入SqlSessionTemplate实例  -->
+    	<!-- <property name="sqlSessionTemplate" ref="sqlSession"/> -->
+    	<!--也可直接注入SqlSessionFactory实例，二者都指定时，SqlSessionFactory失效
+   		<property name="sqlSessionFactory" ref="sqlSessionFactory" /> 
+		-->
+    </bean>
+    
+    <bean id="addressDao" class="org.example.mybatis.dao.impl.AddressDaoImpl">
+    	<!-- 注入SqlSessionTemplate实例  -->
+    	<!-- <property name="sqlSessionTemplate" ref="sqlSession"/> -->
+    	<!--也可直接注入SqlSessionFactory实例，二者都指定时，SqlSessionFactory失效
+   		<property name="sqlSessionFactory" ref="sqlSessionFactory" /> 
+		-->
+    </bean>
+    
+    <bean id="addressService" class="org.example.mybatis.service.impl.AddressServiceImpl">
+    	<property name="addressDao" ref="addressDao"></property>
+    </bean>
+    
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+    	<!--basePackage指定要扫描的包，在此包之下的映射器都会被  搜索到。可指定多个包，包与包之间用逗号或分号分隔-->
+    	<property name="basePackage" value="org.example.mybatis.domain"></property>
+    </bean>
+</beans>

@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.example.mybatis.domain.User">
+	<select id="countAll" resultType="int">
+		select count(*) c from t_user
+	</select>
+
+	<resultMap type="org.example.mybatis.domain.User" id="userReaultMap">
+		<result column="comment2" property="comment"/>
+	</resultMap>
+
+	<select id="selectAll" resultMap="userReaultMap">
+		select * from t_user order by userName asc
+	</select>
+
+	<insert id="insert" parameterType="org.example.mybatis.domain.User">
+		insert into t_user(userName,password,comment)
+		values(#{userName},#{password},#{comment})
+	</insert>
+
+	<!-- <update id="update" parameterType="org.example.mybatis.domain.User">
+		update t_user 
+			set 
+			<if test="userName != null">userName=#{userName},</if>
+			<if test="password != null">password=#{password},</if>
+			<if test="comment != null">comment=#{comment}</if>
+		where userName=#{userName}
+	</update> -->
+	
+	<!-- <update id="update" parameterType="org.example.mybatis.domain.User">
+		update t_user 
+			<set>
+				<if test="userName != null">userName=#{userName},</if>
+				<if test="password != null">password=#{password},</if>
+				<if test="comment != null">comment=#{comment}</if>			
+			</set>
+		where userName=#{userName}
+	</update> -->
+	
+	<update id="update" parameterType="org.example.mybatis.domain.User">
+		update t_user 
+			<trim prefix="set" prefixOverrides=",">
+				<if test="userName != null">userName=#{userName},</if>
+				<if test="password != null">password=#{password},</if>
+				<if test="comment != null">comment=#{comment}</if>	
+			</trim>
+		where userName=#{userName}
+	</update>
+
+	<delete id="delete" parameterType="int">
+		delete from t_user where userName=#{userName}
+	</delete>
+
+	<!-- <select id="findByUserName"
+		resultType="org.example.mybatis.domain.User">
+		select * from t_user 
+			where ${userId} in
+			<foreach collection="userIds" index="index" item="item" open="(" separator="," close=")">#{item}</foreach>
+	</select> -->
+	
+	<!-- <select id="findByUserName"
+		resultType="org.example.mybatis.domain.User">
+		select * from t_user 
+			where userId in
+			<foreach collection="array" index="index" item="item" open="(" separator="," close=")">#{item}</foreach>
+	</select> -->
+	
+	<select id="findByUserId"
+		resultType="org.example.mybatis.domain.User">
+		select * from t_user 
+			where userId in
+			<foreach collection="list" index="index" item="item" open="(" separator="," close=")">#{item}</foreach>
+	</select>
+	
+	<select id="selectAllByeLike" resultType="org.example.mybatis.domain.User">
+		<bind name="pattern" value="'%' +  _parameter  + '%'"/>
+		select * from t_user where userName like #{pattern} order by userName asc
+	</select>
+	
+	<resultMap type="Address" id="addressResulMap">
+		<id column="addressId" property="addressId"/>
+		<result column="addressName" property="addressName"/>
+		<result column="addressee" property="addressee"/>
+		<association property="user" javaType="User">
+			<id column="userId" property="userId"/>
+			<result column="comment2" property="comment"/>
+			<result column="userName" property="userName"/>
+			<result column="password" property="password"/>
+		</association>
+	</resultMap>
+	
+	<select id="selectUserAndAddress" resultMap="addressResulMap">
+		select * from t_user a left join t_address b on b.userId2 = a.userId
+	</select>
+	
+	<resultMap type="User" id="userResultMap">
+		<id column="userId" property="userId"/>
+		<result column="comment2" property="comment"/>
+	</resultMap>
+	
+	<select id="selectUser" parameterType="int" resultMap="userResultMap">
+		select * from t_user where userId = #{userId}
+	</select>
+	
+</mapper>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.example.mybatis.domain.Address">
+
+	<resultMap type="Address" id="addressResultMap">
+		<id column="addressId" property="addressId"/>
+		<result column="addressName" property="addressName"/>
+		<result column="postCode" property="postCode"/>
+		<result column="addressee" property="addressee"/>
+		<association property="user" column="userId" javaType="User">
+			<id column="userId" property="userId"/>
+			<result column="userName" property="userName"/>
+			<result column="comment2" property="comment"/>
+		</association>
+	</resultMap>
+
+	<select id="selectAddress" parameterType="string" resultMap="addressResultMap">
+		select * from t_address a left join t_user b on a.userId2 = b.userId where userId2 = #{userId}
+	</select>
+</mapper>

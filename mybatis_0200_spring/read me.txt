@@ -1,0 +1,15 @@
+CREATE TABLE `t_user` (
+`userId`  bigint(20) NOT NULL AUTO_INCREMENT ,
+`userName`  varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL ,
+`password`  varchar(80) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL ,
+`comment`  varchar(250) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL ,
+PRIMARY KEY (`userId`),
+UNIQUE INDEX `UQ_User_userName` (`userName`) USING BTREE
+)
+
+
+
+采用接口org.apache.ibatis.session.SqlSession的实现类org.mybatis.spring.SqlSessionTemplate。
+    mybatis中, sessionFactory可由SqlSessionFactoryBuilder.来创建。
+    MyBatis-Spring 中，使用了SqlSessionFactoryBean来替代。SqlSessionFactoryBean有一个必须属性dataSource，
+另外其还有一个通用属性configLocation（用来指定mybatis的xml配置文件路径）。
