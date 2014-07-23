@@ -38,21 +38,21 @@ public class UserPersistenceByNoMapperTest {
 		SqlSession session = factory.openSession();
 
 		User user = new User();
-		/*user.setUserName("hongye");
+		user.setUserName("hongye");
 		user.setPassword("123456");
 		user.setComment("备注");
 
 		session.insert(User.class.getName() + ".insert", user);
-		System.out.println("记录条数：" + session.selectOne(User.class.getName() + ".countAll"));*/
-
-		List<User> users = session.selectList(User.class.getName() + ".selectAll");
+		System.out.println("记录条数：" + session.selectOne(User.class.getName() + ".countAll"));
+        session.commit();
+		/*List<User> users = session.selectList(User.class.getName() + ".selectAll");
 		Iterator<User> iter = users.iterator();
 		while (iter.hasNext()) {
 			user = iter.next();
 			System.out.println("用" +
 					"户名：" + user.getUserName() + " 密码："
 					+ user.getPassword() + " 备注：" + user.getComment());
-		}
+		}*/
 
 	}
 	
@@ -67,7 +67,7 @@ public class UserPersistenceByNoMapperTest {
 	
 	@Test
 	public void selectUserTest() {
-		List<User> userList = session.selectList(User.class.getName() + ".selectUser", 13);
+		List<User> userList = session.selectList(User.class.getName() + ".selectUser", 1);
 		for (User user : userList) {
 			List<Address> addressList = user.getAddressList();
 			for (Address address : addressList) {

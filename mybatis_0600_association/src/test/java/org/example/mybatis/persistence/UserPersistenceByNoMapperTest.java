@@ -29,7 +29,7 @@ public class UserPersistenceByNoMapperTest {
 	
 	@Test
 	public void selectUserTest() {
-		User user = session.selectOne(User.class.getName() + ".selectUser", 13);
+		User user = session.selectOne(User.class.getName() + ".selectUser", 1);
 			System.out.println("姓名：" + user.getUserName() + " 密码：" + user.getPassword() + " 备注：" + user.getComment());
 	}
 	

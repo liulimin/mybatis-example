@@ -13,7 +13,7 @@
     <version>0.0.1-SNAPSHOT</version>
     <packaging>jar</packaging>
 
-    <name>mybatis_0100_mapper_xml</name>
+    <name>mybatis_0101_mapper_xml</name>
     <url>http://maven.apache.org</url>
 
     <dependencies>

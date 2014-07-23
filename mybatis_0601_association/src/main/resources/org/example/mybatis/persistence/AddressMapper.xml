@@ -15,10 +15,10 @@
 		<id column="userId" property="userId"/>
 			<result column="userName" property="userName"/>
 			<result column="password" property="password"/>
-			<result column="comment2" property="comment"/>
+			<result column="comment" property="comment"/>
 	</resultMap>
 	
-	<select id="selectAddress" parameterType="string" resultMap="addressResultMap">
-		select * from t_address a left join t_user b on a.userId2 = b.userId where userId2 = #{userId}
+	<select id="selectAddress" parameterType="int" resultMap="addressResultMap">
+		select * from t_address a left join t_user b on a.userId = b.userId where a.userId = #{userId}
 	</select>
 </mapper>

@@ -6,7 +6,7 @@
 		<result column="comment2" property="comment"/>
 	</resultMap>
 	
-	<select id="selectUser" parameterType="String" resultMap="userResultMap">
+	<select id="selectUser" parameterType="int" resultMap="userResultMap">
 		select * from t_user where userId = #{userId}
 	</select>
 	

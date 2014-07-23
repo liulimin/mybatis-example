@@ -39,7 +39,7 @@ public class AddressPersistenceByNoMapperTest {
 	@Test
 	public void insertTest() {
 		List<Integer> list = new ArrayList<Integer>();
-		list.add(13);
+		list.add(1);
 		User user = session.selectOne(User.class.getName() + ".findByUserId", list);
 		Address address = new Address();
 		address.setAddressName("广东省海珠区");
@@ -71,7 +71,7 @@ public class AddressPersistenceByNoMapperTest {
 	
 	@Test
 	public void selectAddressTest() {
-		List<Address> addressList = session.selectList(Address.class.getName() + ".selectAddress", 3);
+		List<Address> addressList = session.selectList(Address.class.getName() + ".selectAddress", 1);
 		for (Address address : addressList) {
 			System.out.println("地址：" + address.getAddressName() + " 收件人：" + address.getAddressee() + " 用户名：" + address.getUser().getUserName() + " 密码：" + address.getUser().getPassword() + " 备注：" + address.getUser().getComment());
 		}

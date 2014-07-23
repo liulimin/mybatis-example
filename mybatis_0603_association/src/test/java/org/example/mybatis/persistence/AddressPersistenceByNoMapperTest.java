@@ -28,7 +28,7 @@ public class AddressPersistenceByNoMapperTest {
 	
 	@Test
 	public void selectAddressTest() {
-		List<Address> addressList = session.selectList(Address.class.getName() + ".selectAddress", 13);
+		List<Address> addressList = session.selectList(Address.class.getName() + ".selectAddress", 1);
 		for (Address address : addressList) {
 			System.out.println("地址：" + address.getAddressName() + " 收件人：" + address.getAddressee() + " 邮编：" + address.getPostCode() + 
 					" 姓名：" + address.getUser().getUserName() + " ID:" + address.getUser().getUserId() + " 密码：" + address.getUser().getPassword()

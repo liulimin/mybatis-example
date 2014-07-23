@@ -10,7 +10,7 @@
 	</select>
 
 	<insert id="insert" parameterType="Address">
-		insert into t_address(addressName, postCode, addressee, userId2)
+		insert into t_address(addressName, postCode, addressee, userId)
 		values(#{addressName},#{postCode},#{addressee}, #{user.userId})
 	</insert>
 

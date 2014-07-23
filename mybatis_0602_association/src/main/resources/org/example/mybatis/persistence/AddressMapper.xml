@@ -7,14 +7,11 @@
 		<result column="addressName" property="addressName"/>
 		<result column="postCode" property="postCode"/>
 		<result column="addressee" property="addressee"/>
-		<association property="user" column="userId" javaType="User">
-			<id column="userId" property="userId"/>
-			<result column="userName" property="userName"/>
-			<result column="comment2" property="comment"/>
-		</association>
+		<association property="user" column="userId" javaType="User" select="org.example.mybatis.domain.User.selectUser"/>
 	</resultMap>
-
-	<select id="selectAddress" parameterType="string" resultMap="addressResultMap">
-		select * from t_address a left join t_user b on a.userId2 = b.userId where userId2 = #{userId}
+	
+	<select id="selectAddress" parameterType="int" resultMap="addressResultMap">
+		select * from t_address where userId = #{userId}
 	</select>
+	
 </mapper>
