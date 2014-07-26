@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.example.mybatis.dao.UserDao">
+	<select id="countAll" resultType="int">
+		select count(*) c from t_user;
+	</select>
+
+	<resultMap type="User" id="userResultMap">
+		<result column="comment2" property="comment"/>
+	</resultMap>
+	
+	<select id="selectAll" resultMap="userResultMap">
+		select * from t_user order by userName asc
+	</select>
+
+	<insert id="insert" parameterType="User">
+		insert into t_user(userName,password,comment2) values(#{userName},#{password},#{comment})
+	</insert>
+
+	<update id="update" parameterType="org.example.mybatis.domain.User">
+		update t_user 
+			<set>
+				<if test="userName != null">userName=#{userName},</if>
+				<if test="password != null">password=#{password},</if>
+				<if test="comment != null">comment2=#{comment}</if>
+			</set>
+		where userId=#{userId}
+	</update>
+
+	<delete id="delete" parameterType="int">
+		delete from t_user where userName=#{userName}
+	</delete>
+
+	<select id="findByUserName" parameterType="String"
+		resultType="org.example.mybatis.domain.User">
+		select * from t_user where userName=#{userName}
+	</select>
+</mapper>
