@@ -3,10 +3,11 @@
 "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
 	<typeAliases>
-		<package name="org.example.mybatis.domain"/>
+        <typeAlias type="org.example.mybatis.domain.User" alias="User"/>
+        <typeAlias type="org.example.mybatis.domain.Address" alias="Address"/>
 	</typeAliases>
-	<!-- <mappers>
+	 <!--<mappers>
 		<mapper resource="org/example/mybatis/persistence/UserMapper.xml" />
 		<mapper resource="org/example/mybatis/persistence/AddressMapper.xml" />
-	</mappers> -->
+	</mappers>-->
 </configuration>

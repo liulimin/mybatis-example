@@ -5,7 +5,7 @@
 		select count(*) c from t_address;
 	</select>
 
-	<select id="selectAll" resultType="org.example.mybatis.domain.User">
+	<select id="selectAll" resultType="Address">
 		select * from t_address order by addressId asc
 	</select>
 
@@ -14,7 +14,7 @@
 		values(#{addressName},#{addressee},#{postCode},#{user.userId})
 	</insert>
 
-	<update id="update" parameterType="org.example.mybatis.domain.User">
+	<update id="update" parameterType="Address">
 		update t_address set 
 			<set>
 				<if test="addressName != null">addressName=#{addressName}</if>
@@ -29,7 +29,7 @@
 	</delete>
 
 	<select id="findByUserName" parameterType="String"
-		resultType="org.example.mybatis.domain.User">
+		resultType="Address">
 		select * from t_address where addressId=#{addressId}
 	</select>
 </mapper>

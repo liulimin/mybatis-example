@@ -5,7 +5,9 @@ import java.util.List;
 
 import org.example.mybatis.domain.User;
 import org.example.mybatis.service.UserService;
+import org.junit.AfterClass;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -32,14 +34,14 @@ public class UserPersistenceTest {
 	
 	@Test
 	public void findByUserNameTest() {
-		User user = userService.findByUserName("liulimin");
+		User user = userService.findByUserName("fzb");
 		System.out.println("姓名：" + user.getUserName() + " 密码：" + user.getPassword() + " 备注：" + user.getComment());
 	}
 	
 	@Test
 	public void updateTest() {
 		User user = new User();
-		user.setUserId(15);
+		user.setUserId(1);
 		user.setUserName("fengzhanbing");
 		userService.update(user);
 	}
@@ -63,5 +65,4 @@ public class UserPersistenceTest {
 		int count = userService.countAll();
 		System.out.println(count);
 	}
-	
 }

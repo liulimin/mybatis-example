@@ -29,9 +29,12 @@
 
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
     	<!--configLocation属性指定mybatis的核心配置文件-->
-        <property name="configLocation" value="classpath:mybatis-config.xml"></property>
+        <!--<property name="configLocation" value="classpath:mybatis-config.xml"></property>-->
         <!-- dataSource属性指定要用到的连接池 -->
         <property name="dataSource" ref="dataSource" />
+
+        <property name="typeAliasesPackage" value="org.example.mybatis.domain"/>
+        <property name="mapperLocations" value="classpath*:org/example/mybatis/persistence/*Mapper.xml"/>
     </bean>
     
     <bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
@@ -44,7 +47,7 @@
     
     <bean id="userDao" class="org.example.mybatis.dao.impl.UserDaoImpl">
     	<!-- 注入SqlSessionTemplate实例  -->
-    	<!-- <property name="sqlSessionTemplate" ref="sqlSession"/> -->
+        <property name="sqlSessionTemplate" ref="sqlSession"/>
     	<!--也可直接注入SqlSessionFactory实例，二者都指定时，SqlSessionFactory失效
    		<property name="sqlSessionFactory" ref="sqlSessionFactory" /> 
 		-->
@@ -52,7 +55,7 @@
     
     <bean id="addressDao" class="org.example.mybatis.dao.impl.AddressDaoImpl">
     	<!-- 注入SqlSessionTemplate实例  -->
-    	<!-- <property name="sqlSessionTemplate" ref="sqlSession"/> -->
+    	<property name="sqlSessionTemplate" ref="sqlSession"/>
     	<!--也可直接注入SqlSessionFactory实例，二者都指定时，SqlSessionFactory失效
    		<property name="sqlSessionFactory" ref="sqlSessionFactory" /> 
 		-->
@@ -61,9 +64,5 @@
     <bean id="addressService" class="org.example.mybatis.service.impl.AddressServiceImpl">
     	<property name="addressDao" ref="addressDao"></property>
     </bean>
-    
-    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-    	<!--basePackage指定要扫描的包，在此包之下的映射器都会被  搜索到。可指定多个包，包与包之间用逗号或分号分隔-->
-    	<property name="basePackage" value="org.example.mybatis.domain"></property>
-    </bean>
+
 </beans>

@@ -14,10 +14,10 @@
 	</select>
 
 	<insert id="insert" parameterType="User">
-		insert into t_user(userName,password,comment2) values(#{userName},#{password},#{comment})
+		insert into t_user(userName,password,comment) values(#{userName},#{password},#{comment})
 	</insert>
 
-	<update id="update" parameterType="org.example.mybatis.domain.User">
+	<update id="update" parameterType="User">
 		update t_user 
 			<set>
 				<if test="userName != null">userName=#{userName},</if>
@@ -27,12 +27,12 @@
 		where userId=#{userId}
 	</update>
 
-	<delete id="delete" parameterType="int">
+	<delete id="delete" parameterType="string">
 		delete from t_user where userName=#{userName}
 	</delete>
 
 	<select id="findByUserName" parameterType="String"
-		resultType="org.example.mybatis.domain.User">
+		resultType="User">
 		select * from t_user where userName=#{userName}
 	</select>
 </mapper>
