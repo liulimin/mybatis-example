@@ -19,7 +19,7 @@
 		where userName=#{userName}
 	</update>
 
-	<delete id="delete" parameterType="int">
+	<delete id="delete" parameterType="String">
 		delete from t_user where userName=#{userName}
 	</delete>
 
