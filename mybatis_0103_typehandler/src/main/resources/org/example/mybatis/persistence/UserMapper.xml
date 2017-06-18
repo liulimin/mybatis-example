@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.example.mybatis.persistence.UserMapper">
+	<resultMap id="userMap" type="user">
+		<id column="userId" property="userId" jdbcType="BIGINT" javaType="long" />
+		<result column="userName" property="userName" javaType="string" jdbcType="VARCHAR"/>
+		<result column="password" property="password" typeHandler="org.example.mybatis.typehandler.MyStringTypeHandler" />
+		<result column="comment" property="comment" javaType="string" jdbcType="VARCHAR"/>
+		<!--<result column="sex" property="sex" typeHandler="org.apache.ibatis.type.EnumOrdinalTypeHandler"/>
+		<result column="sex2" property="sex2" typeHandler="org.apache.ibatis.type.EnumTypeHandler"/>-->
+		<result column="sex" property="sex" typeHandler="org.apache.ibatis.type.EnumOrdinalTypeHandler"/>
+		<result column="sex2" property="sex2" typeHandler="org.apache.ibatis.type.EnumTypeHandler"/>
+		<result column="sex3" property="sex3" typeHandler="org.example.mybatis.typehandler.SexEnumTypeHandler"/>
+	</resultMap>
+
+	<select id="countAll" resultType="int">
+		select count(*) c from t_user
+	</select>
+
+	<select id="selectAll" resultMap="userMap">
+		select * from t_user order by userName asc
+	</select>
+
+	<insert id="insert" parameterType="org.example.mybatis.domain.User">
+		insert into t_user(userName,password,comment,sex, sex2, sex3)
+		values(#{userName},#{password},#{comment},#{sex,typeHandler=org.apache.ibatis.type.EnumOrdinalTypeHandler},
+		#{sex2,typeHandler=org.apache.ibatis.type.EnumTypeHandler},#{sex3,typeHandler=org.example.mybatis.typehandler.SexEnumTypeHandler})
+	</insert>
+
+	<update id="update" parameterType="org.example.mybatis.domain.User">
+		update t_user set userName=#{userName},password=#{password},comment=#{comment}
+		where userName=#{userName}
+	</update>
+
+	<delete id="delete" parameterType="string">
+		delete from t_user where userName=#{userName}
+	</delete>
+
+	<select id="findByUserName" parameterType="String"
+		resultType="org.example.mybatis.domain.User">
+		select * from t_user where userName=#{userName}
+	</select>
+</mapper>

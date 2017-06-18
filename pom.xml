@@ -12,6 +12,7 @@
 		<module>mybatis_0100_mapper_xml</module>
 		<module>mybatis_0101_nomapper_xml</module>
         <module>mybatis_0102_typealiases</module>
+        <module>mybatis_0103_typehandler</module>
         <module>mybatis_0200_spring</module>
         <module>mybatis_0201_spring</module>
         <module>mybatis_0300_mapper_annotation</module>
