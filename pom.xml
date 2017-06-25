@@ -14,6 +14,7 @@
         <module>mybatis_0102_typealiases</module>
         <module>mybatis_0103_typehandler</module>
         <module>mybatis_0104_objectfactory</module>
+        <module>mybatis_0105_databaseidprovider</module>
         <module>mybatis_0200_spring</module>
         <module>mybatis_0201_spring</module>
         <module>mybatis_0300_mapper_annotation</module>

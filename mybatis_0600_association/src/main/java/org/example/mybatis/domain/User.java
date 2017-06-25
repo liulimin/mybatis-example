@@ -31,4 +31,14 @@ public class User {
 	public void setComment(String comment) {
 		this.comment = comment;
 	}
+
+	@Override
+	public String toString() {
+		return "User{" +
+				"userId=" + userId +
+				", userName='" + userName + '\'' +
+				", password='" + password + '\'' +
+				", comment='" + comment + '\'' +
+				'}';
+	}
 }

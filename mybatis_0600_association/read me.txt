@@ -13,6 +13,7 @@ CREATE TABLE `t_address` (
 `addressName`  varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL ,
 `addressee`  varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL ,
 `postCode`  varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL ,
+`user_id`  varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL ,
 PRIMARY KEY (`addressId`)
 )
 

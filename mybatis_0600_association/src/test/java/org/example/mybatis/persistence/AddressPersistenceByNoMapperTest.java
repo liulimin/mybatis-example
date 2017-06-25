@@ -27,6 +27,18 @@ public class AddressPersistenceByNoMapperTest {
 
 		session = factory.openSession();
 	}
+
+	@Test
+	public void insertAddressTest() {
+		User user = session.selectOne(User.class.getName() + ".selectUser", 1);
+		Address address = new Address();
+		address.setAddressee("1111");
+		address.setAddressName("22222");
+		address.setPostCode("33333");
+		address.setUser(user);
+		session.insert(Address.class.getName() + ".inserAddress", address);
+		session.commit();
+	}
 	
 	@Test
 	public void selectAddressTest() {

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+	<properties resource="jdbc.properties">
+		<!--<property name="driver" value="com.mysql.jdbc.Driver" />
+		<property name="url"
+				  value="jdbc:mysql://localhost:3306/test?useUnicode=true&amp;characterEncoding=UTF-8&amp;zeroDateTimeBehavior=convertToNull" />
+		<property name="username" value="root" />
+		<property name="password" value="root" />-->
+	</properties>
+	<environments default="development">
+		<environment id="development">
+			<transactionManager type="JDBC" />
+			<dataSource type="POOLED">
+				<property name="driver" value="${driver}" />
+				<property name="url"
+					value="${url}" />
+				<property name="username" value="${username}" />
+				<property name="password" value="${password}" />
+			</dataSource>
+		</environment>
+	</environments>
+    <!-- 启动Mybatis内部注册的策略器 -->
+	<!--<databaseIdProvider type="DB_VENDOR">-->
+    <!-- 自定义策略器-->
+	<databaseIdProvider type="org.example.mybatis.databaseidprovider.MyDatabaseIdProvider">
+		<property name="DB2" value="db2" />
+		<property name="Oracle" value="oracle" />
+		<property name="Adaptive Server Enterprise" value="sybase" />
+		<property name="MySQL" value="mysql" />
+		<property name="SQL Server" value="sqlserver" />
+	</databaseIdProvider>
+	<mappers>
+		<mapper resource="org/example/mybatis/persistence/UserMapper.xml" />
+	</mappers>
+</configuration>

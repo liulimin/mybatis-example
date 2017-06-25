@@ -43,7 +43,7 @@ public class UserPersistenceByNoMapperTest {
 		User u = (User) session.selectOne(User.class.getName() + ".findByUserName", "hongye");
 		System.out.println(u.getComment());
 
-		session.delete(User.class.getName() + ".delete", "hongye");
+		session.delete(User.class.getName() + ".delete", 2);
 		System.out.println("记录条数：" + session.selectOne(User.class.getName() + ".countAll"));
 
 		session.commit();

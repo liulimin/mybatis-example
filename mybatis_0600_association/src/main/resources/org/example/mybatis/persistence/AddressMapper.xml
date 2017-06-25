@@ -18,4 +18,8 @@
 	<select id="selectAddress" parameterType="int" resultMap="addressResultMap">
 		select * from t_address a left join t_user b on a.userId = b.userId where a.userId = #{userId}
 	</select>
+
+	<insert id="inserAddress" parameterType="address">
+		insert into t_address(addressName, addressee, postCode, userId) VALUES(#{addressName},#{addressee},#{postCode},#{user.userId})
+	</insert>
 </mapper>

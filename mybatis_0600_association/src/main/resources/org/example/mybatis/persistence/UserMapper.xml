@@ -9,5 +9,9 @@
 	<select id="selectUser" parameterType="int" resultMap="userResultMap">
 		select * from t_user where userId = #{userId}
 	</select>
-	
+
+	<insert id="insert" parameterType="org.example.mybatis.domain.User">
+		insert into t_user(userName,password,comment)
+		values(#{userName},#{password},#{comment})
+	</insert>
 </mapper>

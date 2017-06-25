@@ -26,6 +26,16 @@ public class UserPersistenceByNoMapperTest {
 
 		session = factory.openSession();
 	}
+
+	@Test
+	public void insertUserTest() {
+		User user = new User();
+		user.setUserName("test");
+		user.setComment("test");
+		user.setPassword("123123");
+        session.insert(User.class.getName() + ".insert", user);
+        session.commit();
+	}
 	
 	@Test
 	public void selectUserTest() {
