@@ -9,6 +9,7 @@
 	<packaging>pom</packaging>
 	<name>mybatis-example Parent</name>
 	<modules>
+        <module>mybatis_0000_generator</module>
 		<module>mybatis_0100_mapper_xml</module>
 		<module>mybatis_0101_nomapper_xml</module>
         <module>mybatis_0102_typealiases</module>
