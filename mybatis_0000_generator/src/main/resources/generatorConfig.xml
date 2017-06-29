@@ -61,7 +61,7 @@
         <!--</javaClientGenerator>-->
 
 
-        <table schema="test" tableName="t_student_selfcard" domainObjectName="StudentSelfcard"
+        <table schema="test" tableName="t_lecture" domainObjectName="Lecture"
                enableCountByExample="false"
                 enableSelectByExample="false"
                 enableDeleteByExample="false"

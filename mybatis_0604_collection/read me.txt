@@ -1,0 +1,16 @@
+drop table if exists `t_student_lecture`;
+CREATE TABLE `t_student_lecture` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '主键ID',
+  `student_id` int(11) NOT NULL DEFAULT '0' COMMENT '学生编号',
+  `grade` decimal(14,2) NOT NULL COMMENT '课程分数',
+  `note` varchar(250) CHARACTER SET utf8 DEFAULT NULL comment '备注',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
+
+drop table if exists `t_lecture`;
+CREATE TABLE `t_lecture` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT comment '主键ID',
+  `lecture_nmae` varchar(30) CHARACTER SET utf8 NOT NULL comment '课程名称',
+  `note` varchar(80) CHARACTER SET utf8 NOT NULL DEFAULT '' comment '备注',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4

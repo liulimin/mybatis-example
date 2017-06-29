@@ -25,6 +25,7 @@
         <module>mybatis_0601_association</module>
         <module>mybatis_0602_association</module>
         <module>mybatis_0603_association</module>
+        <module>mybatis_0604_collection</module>
         <module>mybatis_0700_spring_mapperscannerconfigurer</module>
         <module>mybatis_0701_spring_mapperscannerconfigurer</module>
         <module>mybatis_0800_log4j</module>
