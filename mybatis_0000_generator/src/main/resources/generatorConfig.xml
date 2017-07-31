@@ -5,7 +5,21 @@
 
 <generatorConfiguration>
     <classPathEntry location="C:/Maven/repo/mysql/mysql-connector-java/5.1.41/mysql-connector-java-5.1.41.jar" />
-    <context id="DB2Tables" targetRuntime="MyBatis3" defaultModelType="flat">
+    <context id="Mysql" targetRuntime="MyBatis3" defaultModelType="flat">
+        <!--  自动识别数据库关键字，默认false，如果设置为true，根据SqlReservedWords中定义的关键字列表；
+        一般保留默认值，遇到数据库关键字（Java关键字），使用columnOverride覆盖 -->
+        <property name="autoDelimitKeywords" value="false"/>
+        <!-- 生成的Java文件的编码 -->
+        <property name="javaFileEncoding" value="UTF-8"/>
+        <!-- 格式化java代码 -->
+        <property name="javaFormatter" value="org.mybatis.generator.api.dom.DefaultJavaFormatter"/>
+        <!-- 格式化XML代码 -->
+        <property name="xmlFormatter" value="org.mybatis.generator.api.dom.DefaultXmlFormatter"/>
+
+        <!-- beginningDelimiter和endingDelimiter：指明数据库的用于标记数据库对象名的符号，比如ORACLE就是双引号，MYSQL默认是`反引号； -->
+        <property name="beginningDelimiter" value="`"/>
+        <property name="endingDelimiter" value="`"/>
+
         <commentGenerator>
             <property name="suppressDate" value="true"/>
             <property name="suppressAllComments" value="true" />
@@ -22,6 +36,9 @@
         </javaTypeResolver>
 
         <javaModelGenerator targetPackage="org.example.mybatis.domain" targetProject="D:/src/main/java/">
+            <!--  for MyBatis3/MyBatis3Simple自动为每一个生成的类创建一个构造方法，构造方法包含了所有的field；而不是使用setter；-->
+            <property name="constructorBased" value="false"/>
+            <!-- 在targetPackage的基础上，根据数据库的schema再生成一层package，最终生成的类放在这个package下，默认为false -->
             <property name="enableSubPackages" value="true" />
             <property name="trimStrings" value="true" />
         </javaModelGenerator>
@@ -33,33 +50,6 @@
         <javaClientGenerator type="XMLMAPPER" targetPackage="org.example.mybatis.mapper"  targetProject="D:/src/main/java/">
             <property name="enableSubPackages" value="true" />
         </javaClientGenerator>
-
-        <!--<javaModelGenerator targetPackage="com.biyabi.backend.model" targetProject="D:/biyabi/biyabi-backend-sql/java/">-->
-            <!--<property name="enableSubPackages" value="true" />-->
-            <!--<property name="trimStrings" value="true" />-->
-        <!--</javaModelGenerator>-->
-
-        <!--<sqlMapGenerator targetPackage="com.biyabi.backend.mapper"  targetProject="D:/biyabi/biyabi-backend-sql/resources/">-->
-            <!--<property name="enableSubPackages" value="true" />-->
-        <!--</sqlMapGenerator>-->
-
-        <!--<javaClientGenerator type="XMLMAPPER" targetPackage="com.biyabi.backend.mapper"  targetProject="D:/biyabi/biyabi-backend-sql/java/">-->
-            <!--<property name="enableSubPackages" value="true" />-->
-        <!--</javaClientGenerator>-->
-
-        <!--<javaModelGenerator targetPackage="com.biyabi.backend.model" targetProject="D:/chenghuaxing/biyabi-backend1/biyabi-backend/src/main/java/">-->
-            <!--<property name="enableSubPackages" value="true" />-->
-            <!--<property name="trimStrings" value="true" />-->
-        <!--</javaModelGenerator>-->
-
-        <!--<sqlMapGenerator targetPackage="sqlMapperXml"  targetProject="D:/chenghuaxing/biyabi-backend1/biyabi-backend/src/main/resources/">-->
-            <!--<property name="enableSubPackages" value="true" />-->
-        <!--</sqlMapGenerator>-->
-
-        <!--<javaClientGenerator type="XMLMAPPER" targetPackage="com.biyabi.backend.mapper"  targetProject="D:/chenghuaxing/biyabi-backend1/biyabi-backend/src/main/java/">-->
-            <!--<property name="enableSubPackages" value="true" />-->
-        <!--</javaClientGenerator>-->
-
 
         <table schema="test" tableName="t_lecture" domainObjectName="Lecture"
                enableCountByExample="false"
